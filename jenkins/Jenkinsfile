@@ -1,8 +1,7 @@
-pipeline
-{
+pipeline {
   agent any
   steps {
-    stage ('build step') {
+    stage('build step') {
        steps {
        script {
          def customImage = docker.build("my-image:${env.BUILD_ID}", "-f Dokerfile .")

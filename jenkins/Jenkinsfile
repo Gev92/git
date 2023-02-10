@@ -10,8 +10,8 @@ pipeline {
     // } 
       steps {
         script {
-          withCredentials([string(credentialsID: 'docker_user', variable: 'DOCKER_USER'),
-                           string(credentialsID: 'docker_pass', variable: 'DOCKER_PASS')]){
+          withCredentials([string(credentialsId: 'docker_user', variable: 'DOCKER_USER'),
+                           string(credentialsId: 'docker_pass', variable: 'DOCKER_PASS')]){
           sh "echo ${DOCKER_PASS} | login --username ${DOCKER_USER} --password-stdin"
           docker.withRegistry("https://index.docker.io") {
             def customImage = docker.build("index.docker.io/my-image:${env.BUILD_ID}", "-f jenkins/Dockerfile .")

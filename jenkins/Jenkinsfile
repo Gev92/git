@@ -2,19 +2,32 @@ pipeline {
   agent any
   stages {
     stage('build step') {
-       steps {
-       script {
-         def customImage = docker.build("my-image:${env.BUILD_ID}", "-f jenkins/Dockerfile .")
-       }
+    //    steps {
+    //    script {
+    //      def customImage = docker.build("my-image:${env.BUILD_ID}", "-f jenkins/Dockerfile .")
+    //    }
+    //   }
+    // } 
+      steps {
+        script {
+          withCredentials([string(credentialsID: 'docker_user', variable: 'DOCKER_USER'),
+                           string(credentialsID: 'docker_pass', variable: 'DOCKER_PASS')]){
+          sh "echo ${DOCKER_PASS} | login --username ${DOCKER_USER} --password-stdin"
+          docker.withRegistry("https://index.docker.io") {
+            def customImage = docker.build("index.docker.io/my-image:${env.BUILD_ID}", "-f jenkins/Dockerfile .")
+            customImage.push()
+            customImage.push 'latest'
+          }
+                           }
+        }
       }
-    } 
-      stage('run step') {
-       steps {
-       script {
-         docker.image("my-image:${env.BUILD_ID}").Run('-tid -p 80:80'){
-       }
-      }   
-     }
-   }
+  //     stage('run step') {
+  //      steps {
+  //      script {
+  //        docker.image("my-image:${env.BUILD_ID}").withRun('-tid -p 80:80'){
+  //      }
+  //     }   
+  //    }
+  //  }
   }
 }

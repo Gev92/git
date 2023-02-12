@@ -21,14 +21,15 @@ pipeline {
                            }
         }
       }
-  //     stage('run step') {
-  //      steps {
-  //      script {
-  //        docker.image("my-image:${env.BUILD_ID}").withRun('-tid -p 80:80'){
-  //      }
-  //     }   
-  //    }
-  //  }
+      stage('run step') {
+       steps {
+       script {
+        sh "docker run -tid -p 80:80 my-image:${env.BUILD_ID}  "
+        //  docker.image("my-image:${env.BUILD_ID}").withRun('-tid -p 80:80'){
+       }
+      }   
+     }
+   }
   }
 }
-}
+

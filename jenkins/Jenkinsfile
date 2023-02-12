@@ -1,6 +1,6 @@
 def remote = [:]
 remote.name = "docker"
-remote.host = "34.219.76.37"
+remote.host = "35.93.133.125"
 remote.allowAnyHosts = true
 pipeline {
   agent any

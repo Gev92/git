@@ -26,7 +26,7 @@ pipeline {
         withCredentials([sshUserPrivateKey(credentialsId: 'ssh_user', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
         remote.identityFile = identity
-        sh "docker run -tid -p 80:80 gevorg92/my-image:${env.BUILD_ID}"
+        sshCommand remote: remote, command: "docker run -tid -p 80:80 gevorg92/my-image:${env.BUILD_ID}"
         //  docker.image("my-image:${env.BUILD_ID}").withRun('-tid -p 80:80'){
         }
       }   

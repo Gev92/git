@@ -23,7 +23,7 @@ pipeline {
       stage('run step') {
        steps {
        script {
-        withCredentials([sshUserPrivateKey(credentialsId: 'ssh_user', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'myCredentialId', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
         remote.identityFile = identity
         sshCommand remote: remote, command: "docker run -tid -p 80:80 gevorg92/my-image:${env.BUILD_ID}"

@@ -2,12 +2,6 @@ pipeline {
   agent any
   stages {
     stage('build step') {
-    //    steps {
-    //    script {
-    //      def customImage = docker.build("my-image:${env.BUILD_ID}", "-f jenkins/Dockerfile .")
-    //    }
-    //   }
-    // } 
       steps {
         script {
           withCredentials([string(credentialsId: 'docker_user', variable: 'DOCKER_USER'),

@@ -1,5 +1,5 @@
 def remote = [:]
-remote.name = "node-1"
+remote.name = "docker"
 remote.host = "35.93.133.125"
 remote.allowAnyHosts = true
 pipeline {

@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_USER = credentials('DOCKER_USER')
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
-        AWS_CREDENTIALS = credentials('AWS_CREDENTIALS')
+        // AWS_CREDENTIALS = credentials('AWS_CREDENTIALS')
 
     }
 

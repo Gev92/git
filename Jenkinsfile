@@ -37,8 +37,8 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials:'AWS_CREDENTIALS', region: 'us_east_2') {
-                        sh "kubectl apply -f " k8s/
-                }
+                        sh "kubectl apply -f  k8s/"
+                    }
                 }
             }
         }

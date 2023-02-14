@@ -36,24 +36,10 @@ pipeline {
         stage('deploy to remote server') {
             steps {
                 script {
-                    // def remote = [:]
-                    // remote.name = 'deploy1'
-                    // remote.host = '35.174.211.107'
-                    // remote.allowAnyHosts = true
 
                     withAWS(credentials:'AWS_CREDENTIALS', region: 'us_east_2') {
                         sh "kubectl apply -f " k8s/
                 }
-
-                    // withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
-                    // remote.user = userName
-                    // remote.identityFile = identity
-                    // sshCommand remote: remote, command: '''
-                    //     if docker ps |grep 'nginx-app'; then
-                    //         docker rm -f nginx-app
-                    //     fi
-                    // '''
-                    // sshCommand remote: remote, command: "docker run -tid -p 80:80 --name nginx-app ${DOCKER_USER}/my-image:${env.BUILD_ID}"
                 }
             }
         }

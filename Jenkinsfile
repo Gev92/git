@@ -36,8 +36,11 @@ pipeline {
         stage('deploy to remote server') {
             steps {
                 script {
-                    withAWS(credentials:'AWS_CREDENTIALS', region: 'us_east_2') {
-                        sh "kubectl apply -f  k8s/"
+                    withAWS(credentials:'AWS_CREDENTIALS', region: 'us-east-2') {
+                        sh '''
+                        aws eks --region us-east-2 update-kubeconfig --name K8s-exam
+                        kubectl apply -f  k8s/
+                        '''
                     }
                 }
             }

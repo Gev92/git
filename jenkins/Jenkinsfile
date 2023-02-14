@@ -1,6 +1,6 @@
 def remote = [:]
 remote.name = "docker"
-remote.host = "35.93.133.125"
+remote.host = "34.213.177.11"
 remote.allowAnyHosts = true
 pipeline {
   agent any
@@ -23,7 +23,7 @@ pipeline {
       stage('run step') {
        steps {
        script {
-        withCredentials([sshUserPrivateKey(credentialsId: 'myCredentialId', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'ssh_user', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
         remote.identityFile = identity
         sshCommand remote: remote, command: "docker run -tid -p 80:80 gevorg92/my-image:${env.BUILD_ID}"
